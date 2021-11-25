@@ -1,0 +1,35 @@
+{% load static %}
+<html>
+<head>
+    <title>List Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    {% csrf_token %}
+    <table class="table table-dark">
+        <thead>
+            <td>Event id</td>
+            <td>Title</td>
+            <td>Body</td>
+            <td>Private</td>
+            <td>Action</td>
+            <td>Update</td>
+        </thead>
+        <tbody>
+        {% for el in events %}
+            <tr>
+                <td>{{ el.id }}</td>
+                <td>{{ el.title }}</td>
+                <td>{{ el.body }}</td>
+                <td>{% if el.is_private %} Có {% else %} Không {% endif %}</td>
+                <td><button class="btn btn-danger btn-delete" event-id="{{ el.id }}">Xóa</button></td>
+                <td><button class="btn btn-danger btn-update" event-id="{{ el.id }}">Cập nhật</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
